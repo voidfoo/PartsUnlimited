@@ -18,7 +18,7 @@ namespace PartsUnlimited.Utils
             const string ImageCdn = "some/test/path";
 
             var config = Substitute.For<IConfiguration>();
-            config.Get("images").Returns(ImageCdn);
+            config["images"].Returns(ImageCdn);
 
             var cdnConfig = new ContentDeliveryNetworkConfiguration(config);
 
@@ -29,7 +29,7 @@ namespace PartsUnlimited.Utils
         public void ImageContentNull()
         {
             var config = Substitute.For<IConfiguration>();
-            config.Get("images").Returns((string)null);
+            config["images"].Returns((string)null);
             var cdnConfig = new ContentDeliveryNetworkConfiguration(config);
 
             Assert.Null(cdnConfig.Images);
@@ -46,7 +46,7 @@ namespace PartsUnlimited.Utils
 
             var config = Substitute.For<IConfiguration>();
             var scriptsConfig = CreateConfig(values);
-            config.GetConfigurationSection("Scripts").Returns(scriptsConfig);
+            config.GetSection("Scripts").Returns(scriptsConfig);
 
             var cdnConfig = new ContentDeliveryNetworkConfiguration(config);
 
@@ -60,13 +60,13 @@ namespace PartsUnlimited.Utils
             var config = Substitute.For<IConfiguration>();
             var emptyConfig = Substitute.For<IConfiguration>();
 
-            var subkeys = values.Select(v => new KeyValuePair<string, IConfiguration>(v.Name, emptyConfig));
+            var subkeys = values.Select(v => emptyConfig);
 
-            config.GetConfigurationSections().Returns(subkeys);
+            config.GetChildren().Returns(subkeys);
 
             foreach (var value in values)
             {
-                config.Get(value.Name).Returns(value.Path);
+                config[value.Name].Returns(value.Path);
             }
 
             return config;

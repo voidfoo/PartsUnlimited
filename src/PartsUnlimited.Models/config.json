@@ -1,2 +1,7 @@
 ﻿{
+  "Data": {
+    "DefaultConnection": {
+      "ConnectionString": "Server=(LocalDB)\\v11.0;Database=MigrationDB;TruestedConnection=True;MultipleActiveResultSets=true;"
+    }
+  }
 }
