@@ -15,13 +15,7 @@ namespace PartsUnlimited.WebsiteConfiguration
 
         private string GetString(IConfiguration config, string key)
         {
-            string s;
-            if (config.TryGet(key, out s))
-            {
-                return s;
-            }
-
-            return null;
+            return config[key];
         }
 
         public string AccountKey { get; }

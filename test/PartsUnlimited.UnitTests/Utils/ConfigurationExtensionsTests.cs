@@ -33,13 +33,13 @@ namespace PartsUnlimited.Utils
             var config = Substitute.For<IConfiguration>();
             var emptyConfig = Substitute.For<IConfiguration>();
 
-            var subkeys = values.Select(v => new KeyValuePair<string, IConfiguration>(v.Name, emptyConfig));
+            var subkeys = values.Select(v => emptyConfig);
 
-            config.GetConfigurationSections().Returns(subkeys);
+            config.GetChildren().Returns(subkeys);
 
             foreach (var value in values)
             {
-                config.Get(value.Name).Returns(value.Path);
+                config[value.Name].Returns(value.Path);
             }
 
             return config;
