@@ -1,19 +1,29 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System;
 using Microsoft.Azure.WebJobs;
-using Microsoft.Framework.ConfigurationModel;
+using Microsoft.Dnx.Runtime;
+using Microsoft.Framework.Configuration;
+using System;
 
 namespace PartsUnlimited.WebJobs.UpdateProductInventory
 {
     public class Program
     {
+        public IConfiguration Configuration { get; set; }
+
+        public Program(IApplicationEnvironment env)
+        {
+            var builder = new ConfigurationBuilder(env.ApplicationBasePath)
+                    .AddJsonFile("config.json");
+
+            Configuration = builder.Build();
+        }
+
         public int Main(string[] args)
         {
-            var config = new Configuration().AddJsonFile("config.json");
-            var webjobsConnectionString = config.Get("Data:AzureWebJobsStorage:ConnectionString");
-            var dbConnectionString = config.Get("Data:DefaultConnection:ConnectionString");
+            var webjobsConnectionString = Configuration["Data:AzureWebJobsStorage:ConnectionString"];
+            var dbConnectionString = Configuration["Data:DefaultConnection:ConnectionString"];
 
             if (string.IsNullOrWhiteSpace(webjobsConnectionString))
             {

@@ -103,7 +103,7 @@ namespace PartsUnlimited.Controllers
 
             if (!string.IsNullOrWhiteSpace(requestVerification))
             {
-                var tokens = requestVerification.Split(':');
+                var tokens = requestVerification.ToString().Split(':');
 
                 if (tokens != null && tokens.Length == 2)
                 {

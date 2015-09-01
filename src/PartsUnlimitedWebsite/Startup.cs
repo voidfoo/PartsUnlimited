@@ -8,10 +8,10 @@ using Microsoft.AspNet.Diagnostics.Entity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
+using Microsoft.Dnx.Runtime;
 using Microsoft.Framework.Caching.Memory;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
-using Microsoft.Dnx.Runtime;
 using PartsUnlimited.Areas.Admin;
 using PartsUnlimited.Models;
 using PartsUnlimited.Queries;
@@ -69,7 +69,6 @@ namespace PartsUnlimited
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<PartsUnlimitedContext>()
                 .AddDefaultTokenProviders();
-
 
             // Configure admin policies
             services.ConfigureAuthorization(auth =>

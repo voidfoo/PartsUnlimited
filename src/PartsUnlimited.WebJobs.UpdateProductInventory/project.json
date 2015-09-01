@@ -7,14 +7,14 @@
     "licenseUrl": "",
     "dependencies": {
         "PartsUnlimited.Models": "",
-		"Microsoft.Azure.WebJobs": "1.0.0",
-		"Microsoft.Azure.WebJobs.Core": "1.0.0"
+        "Microsoft.Azure.WebJobs": "1.0.0",
+        "Microsoft.Azure.WebJobs.Core": "1.0.0"
     },
   "commands": {
     "PartsUnlimited.WebJobs.UpdateProductInventory" : "PartsUnlimited.WebJobs.UpdateProductInventory"
   },
   "frameworks" : {
-    "dnx451": { }
+    "dnx451": {
     }
   }
 }

@@ -1,14 +1,14 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System;
-using System.Linq;
 using Microsoft.Azure.WebJobs;
-using Microsoft.Framework.ConfigurationModel;
+using Microsoft.Framework.Configuration;
 using Microsoft.WindowsAzure.Storage.Queue;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using PartsUnlimited.Models;
+using System;
+using System.Linq;
 
 namespace PartsUnlimited.WebJobs.ProcessOrder
 {
@@ -17,11 +17,14 @@ namespace PartsUnlimited.WebJobs.ProcessOrder
         [NoAutomaticTrigger]
         public static void CreateOrderProcessTask([Queue("orders")] CloudQueue orderQueue)
         {
+            var builder = new ConfigurationBuilder(Environment.CurrentDirectory)
+                    .AddJsonFile("config.json");
+
+            var config = builder.Build();
             Console.WriteLine("Starting Create Order Process Task");
             try
             {
-                var config = new Configuration().AddJsonFile("config.json");
-                var connectionString = config.Get("Data:DefaultConnection:ConnectionString");
+                var connectionString = config["Data:DefaultConnection:ConnectionString"];
 
                 using (var context = new PartsUnlimitedContext(connectionString))
                 {

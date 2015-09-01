@@ -49,7 +49,7 @@ namespace PartsUnlimited.Controllers
 
             try
             {
-                if (string.Equals(formCollection.GetValues("PromoCode").FirstOrDefault(), PromoCode,
+                if (string.Equals(formCollection["PromoCode"].FirstOrDefault(), PromoCode,
                     StringComparison.OrdinalIgnoreCase) == false)
                 {
                     return View(order);

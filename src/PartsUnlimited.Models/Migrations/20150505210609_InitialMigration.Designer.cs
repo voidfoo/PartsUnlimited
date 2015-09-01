@@ -9,17 +9,13 @@ using Microsoft.Data.Entity.SqlServer.Metadata;
 namespace PartsUnlimited.Models.Migrations
 {
     [DbContext(typeof(PartsUnlimitedContext))]
-    partial class MyMigration
+    [Migration("20150505210609_InitialMigration")]
+    partial class InitialMigration
     {
-        public override string Id
-        {
-            get { return "20150505210609_InitialMigration"; }
-        }
-
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .Annotation("ProductVersion", "7.0.0-beta8-15515")
+                .Annotation("ProductVersion", "7.0.0-beta8-15557")
                 .Annotation("SqlServer:ValueGenerationStrategy", SqlServerIdentityStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRole", b =>

@@ -38,5 +38,19 @@ namespace PartsUnlimited.Models
                         });
             }
         }
+
+        public void Configure(IServiceCollection services)
+        {
+            var sqlConnectionString = Configuration["Data:DefaultConnection:ConnectionString"];
+            if (!String.IsNullOrEmpty(sqlConnectionString))
+            {
+                services.AddEntityFramework()
+                        .AddSqlServer()
+                        .AddDbContext<PartsUnlimitedContext>(options =>
+                        {
+                            options.UseSqlServer(sqlConnectionString);
+                        });
+            }
+        }
     }
 }
